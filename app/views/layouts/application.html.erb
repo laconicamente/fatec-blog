@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= favicon_link_tag 'favicon.png' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="logo">
+      <%= link_to root_path do %>
+        <%= image_tag "logo.svg" %>
+      <% end %>
+    </div>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <ul>
+      <li class="category">Website</li>
+      <li>Blog</li>
+      <li>about</li>
+    </ul>
 
-  <body>
+    <ul>
+      <li class="category">Social</li>
+      <li><a href="https://twitter.com/mackenziechild">Twitter</a></li>
+      <li><a href="http://instagram.com/mackenziechild">Instagram</a></li>
+      <li><a href="https://github.com/mackenziechild">Github</a></li>
+      <li><a href="mailto:hey@mackenziechild.me">Email</a></li>
+    </ul>
+      <p class="sign_in">Admin Login</p>
+  </div>
+
+  <div id="main_content">
+    <div id="header">
+        <p>All Posts</p>
+        <p>About</p>
+        <div class="buttons">
+          <button class="button">new post</button>
+          <button class="button">logout﻿</button>
+        </div>
+    </div>
+
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>
