@@ -13,6 +13,8 @@
  *= require_tree .
  *= require_self
  */
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import 'normalize';
 
 html, body {
@@ -118,7 +120,8 @@ a {
     }
     .buttons {
       float: right;
-      margin-top: -6px;
+      position:absolute;
+      right:0;
       .button {
         font-size: .8em;
         margin-left: .5em;

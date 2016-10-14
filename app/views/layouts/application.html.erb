@@ -9,53 +9,139 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="sidebar">
-    <div id="logo">
-      <%= link_to root_path do %>
-        <%= image_tag "logo.svg" %>
-      <% end %>
-    </div>
+    <nav class="navbar navbar-inverse no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header ">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    
+                </div><!-- navbar-header-->
+ 
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-    <ul>
-      <li class="category">Website</li>
-      <li><%= link_to 'Blog', root_path %></li>
-      <li><%= link_to 'About', about_path %></li>
-    </ul>
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"><span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                  <span class="icon-bar"></span>
+                                </button></li>
+                            </ul>
+                            <div class="container-fluid">
+                            <div class="row" style="padding-top:8px;">
+                              <div class="col-md-5" style="padding-top:5px;">
+                                <% if current_page?(root_path) %>
+                                  <p class="title-header">All Posts</p>
+                                <% elsif current_page?(about_path) %>
+                                  <p class="title-header">About</p>
+                                <% else %>
+                                  <%= link_to ("<p class='title-header'>Back to All Posts</p>").html_safe, root_path %>
+                                <% end %>
+                              </div>
+                              <div class="col-md-3">
+                                    <%= link_to root_path do %>
+                                      <%= image_tag "logo.svg" %>
+                                    <% end %>
+                                
+                              </div>
+                              <div class="col-md-3">
+                                <% if user_signed_in? %>
+                                  <div>
+                                    <button class="button btn-header"><%= link_to "Novo Post", new_post_path %></button>
+                                    <button class="button btn-header"><%= link_to("Sair", destroy_user_session_path, method: :delete) %>﻿</button>
+                                  </div>
+                                <% end %>
+                              </div>
+                              </div>
+                              </div>
+                              <% flash.each do |name, msg| %>
+                                <%= content_tag(:div, msg, class: "alert") %>
+                              <% end %>
+                </div><!-- bs-example-navbar-collapse-1 -->
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
 
-    <ul>
-      <li class="category">Social</li>
-      <li><a href="https://twitter.com/mackenziechild">Twitter</a></li>
-      <li><a href="http://instagram.com/mackenziechild">Instagram</a></li>
-      <li><a href="https://github.com/mackenziechild">Github</a></li>
-      <li><a href="mailto:hey@mackenziechild.me">Email</a></li>
-    </ul>
-    <% if !user_signed_in? %>
-      <p class="sign_in"><%= link_to('Login', new_user_session_path)  %>  </p>
-    <% end %>
-  </div>
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
 
-  <div id="main_content">
-    <div id="header">
-      <% if current_page?(root_path) %>
-        <p>All Posts</p>
-      <% elsif current_page?(about_path) %>
-        <p>About</p>
-      <% else %>
-        <%= link_to "Back to All Posts", root_path %>
-      <% end %>
-      <% if user_signed_in? %>
-        <div class="buttons">
-          <button class="button"><%= link_to "New Post", new_post_path %></button>
-          <button class="button"><%= link_to("Log Out", destroy_user_session_path, method: :delete) %>﻿</button>
+                    
+                <li class="active">
+                   
+                  <%= link_to ("<span class='fa-stack fa-lg pull-left' ><i class='fa fa-calendar fa-stack-1x '></i></span> <p style='position:relative;left:20px !important;'>Home</p>").html_safe, root_path %>
+
+                </li>
+              
+                <li>
+                     <%= link_to ("<span class='fa-stack fa-lg pull-left' ><i class='fa fa-cloud fa-stack-1x '></i></span> <p style='position:relative;left:20px !important;'>About</p>").html_safe, about_path %>
+                </li>
+        
+                <li>
+                  <a href="https://twitter.com/danielacfp" target="_blank">
+                  <span class='fa-stack fa-lg pull-left' ><i class='fa fa-twitter fa-stack-1x '></i></span><p style='position:relative;left:20px !important;'>Twitter</p></a>
+                </li>
+                <li>
+                  <a href="http://instagram.com/laconicamente" target="_blank">
+                  <span class='fa-stack fa-lg pull-left' ><i class='fa fa-instagram fa-stack-1x '></i></span>
+                  <p style='position:relative;left:20px !important;'>Instagram</p></a>
+                </li>
+                <li>
+                  <a href="mailto:contato@famousgram.com.br">
+                  <span class='fa-stack fa-lg pull-left' ><i class='fa fa-envelope fa-stack-1x '></i></span>
+                  <p style='position:relative;left:20px !important;'>Email</p></a>
+                </li>
+                 <% if !user_signed_in? %>
+                 <li>
+                     <%= link_to ("<span class='fa-stack fa-lg pull-left' ><i class='fa fa-user fa-stack-1x '></i></span> <p style='position:relative;left:20px !important;'>Login</p>").html_safe,  new_user_session_path %>
+                </li>
+                <% end %>
+            </ul>
         </div>
-      <% end %>
-    </div>
+        <!-- /#sidebar-wrapper -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+                <div class="row">                    
+                    <%= yield %>
+                  </div>
+              </div>
+            </div>
+          </div>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class: "alert") %>
-    <% end %>
 
-    <%= yield %>
-  </div>
+  
+  <script>
+          
+    $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+         $("#menu-toggle-2").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled-2");
+            $('#menu ul').hide();
+        });
+     
+         function initMenu() {
+          $('#menu ul').hide();
+          $('#menu ul').children('.current').parent().show();
+          //$('#menu ul:first').show();
+          $('#menu li a').click(
+            function() {
+              var checkElement = $(this).next();
+              if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+                return false;
+                }
+              if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+                $('#menu ul:visible').slideUp('normal');
+                checkElement.slideDown('normal');
+                return false;
+                }
+              }
+            );
+          }
+        $(document).ready(function() {initMenu();});
+    </script>
+
 </body>
 </html>

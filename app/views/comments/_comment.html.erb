@@ -1,16 +1,19 @@
-<div class="comment clearfix">
-	<div class="comment_content">
-		<p class="comment_name"><strong><%= comment.name %></strong></p>
-		<p class="comment_body"><%= comment.body %></p>
-		<p class="comment_time"><%= time_ago_in_words(comment.created_at) %> Ago</p>
+<div class="container-fluid">
+	<div class="row comment clearfix">
+		<div class="col-md-10 comment_content">
+			<p class="comment_name"><strong><%= comment.name %></strong></p>
+			<p class="comment_body"><%= comment.body %></p>
+			<p class="comment_time"><%= time_ago_in_words(comment.created_at) %> Ago</p>
+		</div>
+
+		<% if user_signed_in? %>
+			<div clas="col-md-2">
+				<p class="text-right"><%= link_to 'Excluir', [comment.post, comment],
+						method: :delete,
+						class:"button",
+						data: { confirm: 'Você tem certeza que deseja excluir este comentário?'} %>
+				</p>	
+			</div>
+		<% end %>	
 	</div>
-
-	<% if user_signed_in? %>
-		<p><%= link_to 'Delete', [comment.post, comment],
-					method: :delete,
-					class:"button",
-					data: { confirm: 'Are you sure?'} %>
-		</p>	
-	<% end %>	
-
 </div>

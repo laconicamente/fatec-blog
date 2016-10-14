@@ -1,24 +1,28 @@
-<div id="post_content">
-	<h1 class="title">
-		<%= @post.title %>
-	</h1>
+<div clas="container-fluid">
+	<div clas="row">
+		<div id="post_content" class="col-md-12">
+			<h1 class="title">
+				<%= @post.title %>
+			</h1>
 
-	<p class="date">
-		Submitted <%= time_ago_in_words(@post.created_at) %> Ago
-		<% if user_signed_in? %>
-			| <%= link_to 'Edit', edit_post_path(@post) %>
-			| <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?'} %>
-		<% end %>
-	</p>
+			<p class="date">
+				Enviado <%= time_ago_in_words(@post.created_at) %> Ago
+				<% if user_signed_in? %>
+					| <%= link_to 'Editar', edit_post_path(@post) %>
+					| <%= link_to 'Excluir', post_path(@post), method: :delete, data: { confirm: 'Are you sure?'} %>
+				<% end %>
+			</p>
 
-	<p class="body">
-		<%= @post.body %>
-	</p>
-	
-	<div id="comments">
-		<h2><%= @post.comments.count %> Comments</h2>
-		<%= render @post.comments %>
-		<h3>Add a comment</h3>
-		<%= render "comments/form" %>
+			<p class="body">
+				<%= @post.body %>
+			</p>
+			
+			<div id="comments" class="form-horizontal center">
+				<h3><%= @post.comments.count %> Comentários</h3>
+				<%= render @post.comments %>
+				<h3>Deseja adicionar um comentário?</h3>
+				<%= render "comments/form" %>
+			</div>
+		</div>
 	</div>
 </div>

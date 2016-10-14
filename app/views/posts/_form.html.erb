@@ -1,7 +1,7 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, :html => {:class => "form-horizontal center"}  do |f| %>
     <% if @post.errors.any? %>
 		<div id="errors">
-			<h2><%= pluralize(@post.errors.count, "error") %> prevented this post from saving</h2>
+			<h2><%= pluralize(@post.errors.count, "erros") %> que impediu de salvar o formulário:</h2>
 			<ul>
 				<% @post.errors.full_messages.each do |msg| %>
 						<li><%= msg %></li>
@@ -9,15 +9,21 @@
 			</ul>
 		</div>
 	<% end %>
-	<p>
-		<%= f.label :title %><br/>	
-		<%= f.text_field :title %><br/>
-	</p>
-	<p>
-		<%= f.label :body %><br/>
-		<%= f.text_area :body %>
-	</p>
-	<p>
-		<%= f.submit %>
-	</p>
+	<div class="form-group">
+		<%= f.label :title, "Título:", class: "col-md-1 control-label" %>
+		<div class="col-md-12">
+		<%= f.text_field :title, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :body, "Corpo:", class: "col-md-1 control-label"  %>
+		<div class="col-md-12">
+		<%= f.text_area :body, class: "form-control" %>
+		</div>
+		<br><br>
+
+		<div class="col-md-8 padding-top">
+		<%= f.submit 'Enviar', :class => 'button' %>
+		</div>
+	</div>
 <% end %>
