@@ -7,6 +7,18 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= favicon_link_tag 'favicon.png' %>
   <%= csrf_meta_tags %>
+  <script>
+    $(function(){   
+      var nav = $('#sidebar-wrapper');   
+      $(window).scroll(function () { 
+        if ($(this).scrollTop() > 45) { 
+          nav.addClass("main-nav"); 
+        } else { 
+          nav.removeClass("main-nav");
+        } 
+      });  
+    });
+  </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse no-margin">

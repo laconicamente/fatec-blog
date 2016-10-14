@@ -1,5 +1,13 @@
+.main-nav{
+    position:fixed;
+    top:0;
+}
 .padding-top{
     top:15px;
+}
+#sidebar-wrapper{
+    max-height:100% !important;
+    position:fixed !important;
 }
 .post-index{
     padding-bottom:20px;
